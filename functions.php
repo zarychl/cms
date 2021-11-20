@@ -42,7 +42,7 @@ function checkPassword($login, $password)// sprawdzanie czy hasła zgadzają si�
     {
         $user = getUserInfo(getUserIdByMail($login));
 
-        if(password_hash($password, PASSWORD_BCRYPT) == $user['password']);
+        if(password_verify($password, $user['password']));
             $ok = true;
     }
 
