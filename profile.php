@@ -4,8 +4,7 @@ include_once("header.php");
 
 if(@$_GET['logout'] == 1)
 {
-    $_SESSION = array();
-    session_destroy();
+    logoutUser();//wylogowujemy użytkownika
 }
 
 if(!isUserLoggedIn())//sprawdzamy czy użytkownik jest zalogowany...

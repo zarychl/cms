@@ -2,11 +2,11 @@
 include_once("db.php");
 
 
-function isUserLoggedIn()
+function isUserLoggedIn()//sprawdzamy, czy użytkownik jest zalogowany
 {
     return isset($_SESSION['userId']);
 }
-function getUserInfo($userId)
+function getUserInfo($userId)//pobieranie informacji o użytkowniku o danym ID
 {
     global $mysqli;
     $stmt = $mysqli->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
@@ -18,7 +18,7 @@ function getUserInfo($userId)
     
     return $row;
 }
-function getUserIdByMail($mail)
+function getUserIdByMail($mail)//pobieranie id użytkownika o podanym adresie mail
 {
     global $mysqli;
     $stmt = $mysqli->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
@@ -34,7 +34,7 @@ function getUserIdByMail($mail)
     }
     return $row['id'];
 }
-function checkPassword($login, $password)
+function checkPassword($login, $password)// sprawdzanie czy hasła zgadzają się
 {
     if(getUserIdByMail($login) == -1)
         $ok = false;
@@ -49,9 +49,14 @@ function checkPassword($login, $password)
     return $ok;
 
 }
-function loginUser($userIdToLogIn)
+function loginUser($userIdToLogIn)//logowanie użytkownika
 {
     $_SESSION['userId'] = $userIdToLogIn;
+}
+function logoutUser()//wylogowanie użytkownika
+{
+    $_SESSION = array();
+    session_destroy();
 }
 
 ?>
