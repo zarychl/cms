@@ -1,7 +1,6 @@
 <?php
 include_once("db.php");
 
-
 function isUserLoggedIn()//sprawdzamy, czy użytkownik jest zalogowany
 {
     return isset($_SESSION['userId']);

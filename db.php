@@ -7,7 +7,4 @@ if ($mysqli -> connect_errno) {
   echo "Błąd łączenia z badą danych: " . $mysqli -> connect_error;
   exit();
 }
-
-
-
 ?>
