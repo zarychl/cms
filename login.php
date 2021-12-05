@@ -3,7 +3,7 @@
 
     if(isUserLoggedIn())//sprawdzamy czy użytkownik jest zalogowany...
     {
-        header("Location: profile.php");//jeśli tak to przenosimy go do zaplecza
+        header("Location: /admin");//jeśli tak to przenosimy go do zaplecza
     }
 
     if(!empty($_POST['login']))
@@ -13,7 +13,7 @@
         if($isPasswordOk == 1)
         {
             loginUser(getUserIdByMail($_POST['login']));
-            header("Location: profile.php");
+            header("Location: admin/index.php");
         }
     }
 ?>

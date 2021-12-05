@@ -17,6 +17,22 @@ function getUserInfo($userId)//pobieranie informacji o użytkowniku o danym ID
     
     return $row;
 }
+function getCurrentUserInfo()
+{
+    if(!isUserLoggedIn())
+    {
+        return -1;
+    }
+    global $mysqli;
+    $stmt = $mysqli->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
+    $stmt->bind_param("i", $_SESSION['userId']);
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    
+    return $row;
+}
 function getUserIdByMail($mail)//pobieranie id użytkownika o podanym adresie mail
 {
     global $mysqli;
@@ -35,13 +51,14 @@ function getUserIdByMail($mail)//pobieranie id użytkownika o podanym adresie ma
 }
 function checkPassword($login, $password)// sprawdzanie czy hasła zgadzają się
 {
+    $ok=false;
     if(getUserIdByMail($login) == -1)
         $ok = false;
     else
     {
         $user = getUserInfo(getUserIdByMail($login));
 
-        if(password_verify($password, $user['password']));
+        if(password_verify($password, $user['password']))
             $ok = true;
     }
 
