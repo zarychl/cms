@@ -15,9 +15,9 @@ function getUserInfo($userId)//pobieranie informacji o użytkowniku o danym ID
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     
-    return $row;
+    return $row;//
 }
-function getCurrentUserInfo()
+function getCurrentUserInfo()//pobieranie informacji o aktualnie zalogowanym użytkowniku
 {
     if(!isUserLoggedIn())
     {

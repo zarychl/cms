@@ -6,14 +6,14 @@
         header("Location: /admin");//jeśli tak to przenosimy go do zaplecza
     }
 
-    if(!empty($_POST['login']))
+    if(!empty($_POST['login']))//Jeśli są dane w metodzie POST
     {
-        $isPasswordOk = checkPassword($_POST['login'], $_POST['password']);
+        $isPasswordOk = checkPassword($_POST['login'], $_POST['password']);//sprawdamy czy podane hasło zgadza się z tym z bady danych
 
-        if($isPasswordOk == 1)
+        if($isPasswordOk == 1)//jeśli tak...
         {
-            loginUser(getUserIdByMail($_POST['login']));
-            header("Location: admin/index.php");
+            loginUser(getUserIdByMail($_POST['login']));//to logujemy użytkownika
+            header("Location: admin/index.php");//i przenosimy go do zaplecza
         }
     }
 ?>

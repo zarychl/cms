@@ -17,7 +17,7 @@
                 <div class="p-2">Biblioteka</div>
                 <div class="p-2">Poczta</div>
                 <div class="p-2">Kontakt</div>
-                <div class="p-2"><a style="color:black;" href="/login.php">Logowanie</a></div>
+                <div class="p-2"><a style="color:black;" href="login.php">Logowanie</a></div>
             </div>
             <div class="d-flex flex-row mt-4">
                 <img src="images/logo.png" style="width: auto; height: 50px;">
