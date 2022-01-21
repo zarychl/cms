@@ -8,7 +8,7 @@
 
     if(!empty($_POST['login']))//Jeśli są dane w metodzie POST
     {
-        $isPasswordOk = checkPassword($_POST['login'], $_POST['password']);//sprawdamy czy podane hasło zgadza się z tym z bady danych
+        $isPasswordOk = checkPassword($_POST['login'], $_POST['password']);//sprawdamy czy podane hasło zgadza się z tym z bazy danych
 
         if($isPasswordOk == 1)//jeśli tak...
         {
