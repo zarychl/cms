@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 26 Mar 2022, 13:45
+-- Czas generowania: 26 Mar 2022, 18:18
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.1.4
 
@@ -14,6 +14,27 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `cms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `searchstats`
+--
+
+CREATE TABLE `searchstats` (
+  `id` int(11) NOT NULL,
+  `q` varchar(256) COLLATE utf8mb4_polish_ci NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Zrzut danych tabeli `searchstats`
+--
+
+INSERT INTO `searchstats` (`id`, `q`, `count`) VALUES
+(1, 'harmonogram', 3),
+(2, 'elearning', 2),
+(3, 'hello there', 2);
 
 -- --------------------------------------------------------
 
@@ -50,8 +71,24 @@ CREATE TABLE `viewstats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
+-- Zrzut danych tabeli `viewstats`
+--
+
+INSERT INTO `viewstats` (`id`, `href`, `name`, `views`) VALUES
+(15, 'http://cms.kw/admin/', 'index.php', 6),
+(16, 'http://cms.kw/admin/addarticle.php', 'addarticle.php', 7),
+(17, 'http://cms.kw/admin/disparticle.php', 'disparticle.php', 15),
+(19, 'http://cms.kw/admin/comments.php', 'comments.php', 2);
+
+--
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `searchstats`
+--
+ALTER TABLE `searchstats`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -70,6 +107,12 @@ ALTER TABLE `viewstats`
 --
 
 --
+-- AUTO_INCREMENT dla tabeli `searchstats`
+--
+ALTER TABLE `searchstats`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
@@ -79,5 +122,5 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `viewstats`
 --
 ALTER TABLE `viewstats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
