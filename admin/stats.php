@@ -18,7 +18,7 @@ $luser = getCurrentUserInfo();
 ?>
 
 <div class="wrapper">
-
+<title>WebScrum | Statystyki</title>
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="img/iconG.png" alt="Logo" height="60" width="60">
@@ -49,14 +49,6 @@ $luser = getCurrentUserInfo();
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-              <?php
-
-              $v = getViewCount(); 
-              foreach($v as $row)
-              {
-                //echo $row["name"];
-              }
-               ?>
 
 <table class="table table-striped">
 <thead>
@@ -73,33 +65,34 @@ $luser = getCurrentUserInfo();
 
 $i = 1;
 $v = getViewCount(); 
-foreach($v as $row)
-{
-  $procent = $row['views'] / getAllViewCount();
-  $procent = round($procent, 2)*100;
+if($v != -1)
+  foreach($v as $row)
+  {
+    $procent = $row['views'] / getAllViewCount();
+    $procent = round($procent, 2)*100;
 
-  if($procent >= 50)
-    $kolor = "bg-success";
-  if($procent <50 && $procent > 25)
-    $kolor = "bg-warning";
-  if($procent <= 25)
-    $kolor = "bg-danger";
-echo "
-<tr>
-<td>$i.</td>
-<td>" . $row['name'] . "</td>
-<td><a href='" . $row['href'] . "'>" . $row['href'] . "</a></td>
-<td>
-  <div class='progress progress-xs'>
-    <div class='progress-bar progress-bar-danger ". $kolor ."' style='width: ". $procent ."%'></div>
-  </div>
-</td>
-<td><span class='badge ". $kolor ."'>". $procent ."%</span></td>
-</tr>
-";
+    if($procent >= 50)
+      $kolor = "bg-success";
+    if($procent <50 && $procent > 25)
+      $kolor = "bg-warning";
+    if($procent <= 25)
+      $kolor = "bg-danger";
+  echo "
+  <tr>
+  <td>$i.</td>
+  <td>" . $row['name'] . "</td>
+  <td><a href='" . $row['href'] . "'>" . $row['href'] . "</a></td>
+  <td>
+    <div class='progress progress-xs'>
+      <div class='progress-bar progress-bar-danger ". $kolor ."' style='width: ". $procent ."%'></div>
+    </div>
+  </td>
+  <td><span class='badge ". $kolor ."'>". $procent ."%</span></td>
+  </tr>
+  ";
 
-$i++;
-}
+  $i++;
+  }
 ?>
 </tbody>
 </table>
