@@ -30,7 +30,7 @@ function getCurrentUserInfo()//pobieranie informacji o aktualnie zalogowanym uż
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    
+
     return $row;
 }
 function getUserIdByMail($mail)//pobieranie id użytkownika o podanym adresie mail
@@ -75,4 +75,79 @@ function logoutUser()//wylogowanie użytkownika
     session_destroy();
 }
 
+/*
+function getPageTitle($url) {
+    $dom = new DOMDocument();
+
+    if($dom->loadHTMLFile($url)) {
+    
+    $list = $dom->getElementsByTagName("title");
+    if ($list->length > 0) {
+    return $list->item(0)->textContent;
+    }
+    }
+}
+*/
+
+function addViewCount($name, $href)
+{
+    if($name == "stats.php") return;
+
+    global $mysqli;
+    $stmt = $mysqli->prepare("SELECT * FROM viewStats WHERE href = ? LIMIT 1");
+    $stmt->bind_param("s", $href);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    
+    if($result->num_rows == 0)// brak takiego rekordu, musimy go stworzyć
+    {
+        $sql = "INSERT INTO `viewstats` (`href`, `name`, `views`) VALUES ('$href', '$name', '1');";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->execute();
+    }
+    else
+    {
+        $sql = "UPDATE `viewstats` SET views = views + 1 WHERE `viewstats`.`href` = '$href';";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->execute();
+    }
+}
+
+function getViewCount()
+{
+    global $mysqli;
+    $views = array();
+    $stmt = $mysqli->prepare("SELECT * FROM `viewstats` ORDER BY views DESC;");
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while($row = $result->fetch_assoc())
+    {
+        array_push($views, $row);
+    }
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $views;
+}
+function getAllViewCount()
+{
+    global $mysqli;
+    $views = array();
+    $stmt = $mysqli->prepare("SELECT SUM(views) from viewstats;");
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_row();
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+
+    return $row[0];
+}
 ?>

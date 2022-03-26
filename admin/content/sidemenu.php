@@ -45,6 +45,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="/admin/stats.php" class="nav-link">
+              <i class="nav-icon fas fa-eye"></i>
+              <p>
+                Wyświetlenia
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -4,6 +4,12 @@
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0
     </div>-->
+    <?php
+$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$filename = explode('/', $_SERVER["SCRIPT_FILENAME"]);
+$filename =  $filename[sizeof($filename)-1];
+addViewCount($filename, $actual_link)
+?>
   </footer>
 
   <!-- Control Sidebar -->

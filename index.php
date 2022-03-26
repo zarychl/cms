@@ -83,4 +83,5 @@
         </div>
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </body>
+    <?php echo("<script>alert('href:' + document.location.href);</script>"); ?>
 </html>
