@@ -114,6 +114,51 @@ function addViewCount($name, $href)
     }
 }
 
+function addSearchCount($q)
+{
+    if($q == "") return;
+
+    global $mysqli;
+    $stmt = $mysqli->prepare("SELECT * FROM searchstats WHERE q = ? LIMIT 1");
+    $stmt->bind_param("s", $q);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    
+    if($result->num_rows == 0)// brak takiego rekordu, musimy go stworzyć
+    {
+        $sql = "INSERT INTO `searchstats` (`q`, `count`) VALUES ('$q', '1');";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->execute();
+    }
+    else
+    {
+        $sql = "UPDATE `searchstats` SET count = count + 1 WHERE `searchstats`.`q` = '$q';";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->execute();
+    }
+}
+
+function getSearchCount($limit)
+{
+    global $mysqli;
+    $val = array();
+    $stmt = $mysqli->prepare("SELECT * FROM searchstats ORDER BY count DESC LIMIT $limit");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    while($row = $result->fetch_assoc())
+    {
+        array_push($val, $row);
+    }
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $val;
+}
+
 function getViewCount()
 {
     global $mysqli;

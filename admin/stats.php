@@ -114,6 +114,63 @@ if($v != -1)
         </div>
       </div>
       <!-- /.card -->
+
+      <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+          <i class="fa-solid fa-magnifying-glass"></i>
+            Wyszukiwanie
+          </h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+              
+        <table class="table table-striped">
+          <thead>
+          <tr>
+          <th style="width: 10px">#</th>
+          <th>Słowa kluczowe</th>
+          <th>Ilość</th>
+          </tr>
+          </thead>
+          <tbody>
+        <?php
+
+        $search = getSearchCount(5);
+        $i = 1;
+      
+        if($search != -1)
+          foreach($search as $s)
+          {
+            $q = $s['q'];
+            $c = $s['count'];
+
+            echo "
+            <tr>
+            <td>$i</td>
+            <td style='font-style: italic;'>'$q'</td>
+            <td>$c</td>
+            </tr>
+            ";
+
+            $i++;
+          }
+
+        ?>
+          
+
+            </tbody>
+        </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+        </div>
+      </div>
+</div>
+      <!-- /.card -->
+
+
     </section>
     <!-- /.content -->
   </div>

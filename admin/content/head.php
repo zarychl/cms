@@ -30,6 +30,7 @@ session_start();
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <script src="https://kit.fontawesome.com/feb83ad71d.js" crossorigin="anonymous"></script>
   <script src="/jquery.js"></script>
   <script src="/clickcounter.js"></script>
 </head>

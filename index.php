@@ -27,7 +27,15 @@
                 <div class="p-2">Nauka &#9662;</div>
                 <div class="p-2">Współpraca &#9662;</div>
                 <div class="p-2">Aktualności &#9662;</div>
+
+                <div id="box">
+		<form id="search" action="/search.php">
+			<input type="text" id="q" name="q" placeholder="Wpisz tekst...">
+			<input type="submit" value="Szukaj">
+		</form>
+	</div>
             </div>
+            
         </div>
         <div class="container-fluid mt-4">
             <img src="images/big_banner/2.jpg" class="mx-auto d-block" style="width: 861px; max-width: 100%; height: auto;">
@@ -83,5 +91,5 @@
         </div>
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </body>
-    <?php echo("<script>alert('href:' + document.location.href);</script>"); ?>
+   
 </html>

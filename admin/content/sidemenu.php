@@ -47,9 +47,9 @@
 
           <li class="nav-item">
             <a href="/admin/stats.php" class="nav-link">
-              <i class="nav-icon fas fa-eye"></i>
+              <i class="nav-icon fas fa-file-code"></i></i><!-- stonks :) -->
               <p>
-                Wyświetlenia
+                Statystyki
               </p>
             </a>
           </li>
