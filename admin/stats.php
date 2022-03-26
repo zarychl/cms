@@ -56,6 +56,7 @@ $luser = getCurrentUserInfo();
 <th style="width: 10px">#</th>
 <th>Strona</th>
 <th>Adres</th>
+<th>Ilość wyświetleń</th>
 <th>% wszystkich</th>
 <th style="width: 40px"></th>
 </tr>
@@ -82,6 +83,7 @@ if($v != -1)
   <td>$i.</td>
   <td>" . $row['name'] . "</td>
   <td><a href='" . $row['href'] . "'>" . $row['href'] . "</a></td>
+  <td>" . $row['views'] . "</td>
   <td>
     <div class='progress progress-xs'>
       <div class='progress-bar progress-bar-danger ". $kolor ."' style='width: ". $procent ."%'></div>
@@ -95,6 +97,16 @@ if($v != -1)
   }
 ?>
 </tbody>
+<tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><span style="float:right;font-weight:bold;">Łącznie:</span></td>
+      <td><?php echo getAllViewCount(); ?></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tfoot>
 </table>
         </div>
         <!-- /.card-body -->

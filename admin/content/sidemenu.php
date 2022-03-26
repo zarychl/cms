@@ -28,7 +28,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/disparticle.php" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Wyświetl</p>
                 </a>
@@ -37,7 +37,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/admin/comments.php" class="nav-link">
               <i class="nav-icon fas fa-comments"></i>
               <p>
                 Komentarze
