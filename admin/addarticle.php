@@ -8,6 +8,12 @@ if(@$_GET['logout'] == 1)
     logoutUser();//wylogowujemy użytkownika
 }
 
+if(isset($_POST['title']))
+{
+    addArticle($_POST['title'], $_POST['content']);
+    $pelensukces = true;
+}
+
 if(!isUserLoggedIn())//sprawdzamy czy użytkownik jest zalogowany...
 {
     echo "<script>window.location.replace('/');</script>";
@@ -29,7 +35,14 @@ $luser = getCurrentUserInfo();
     <!-- Main content -->
     <section style="margin-top:10px;" class="content">
     <div class="row">
+    
         <div class="col-sm-9">
+        <?php 
+        if(@$pelensukces)
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Sukces!</strong> Dodano artykuł!
+            
+            </div>'; ?>
          <div class="card">
             <div class="card-header">
             <h3 class="card-title">
@@ -38,14 +51,16 @@ $luser = getCurrentUserInfo();
             </h3>
             </div>
             <!-- /.card-header -->
+            <form method="post">
             <div class="card-body">
-              <input placeholder="Dodaj tytuł..." type="text" class="form-control"/><br>
-              <textarea placeholder="Treść..." class="form-control"></textarea>
+              <input name="title" required placeholder="Dodaj tytuł..." type="text" class="form-control"/><br>
+              <textarea name="content" required placeholder="Treść..." class="form-control"></textarea>
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-                <button type="button" class="btn btn-success"><i class="fas fa-plus-circle"></i> Dodaj</button>
+                <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Dodaj</button>
             </div>
+            </form>
         </div>
 </div>
 
@@ -59,20 +74,20 @@ $luser = getCurrentUserInfo();
             <!-- /.card-header -->
             <div class="card-body">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="kat1">
-                <label class="form-check-label" for="kat1">
-                    Kategoria 1
-                </label>
-                <br>
-                <input class="form-check-input" type="checkbox" value="" id="kat2">
-                <label class="form-check-label" for="kat2">
-                    Kategoria 2
-                </label>
-                <br>
-                <input class="form-check-input" type="checkbox" value="" id="kat3">
-                <label class="form-check-label" for="kat3">
-                    Kategoria 3
-                </label>
+                <?php
+                $categories = getCategories();
+
+                foreach($categories as $c)
+                {
+                    echo '
+                    <input class="form-check-input" type="checkbox" value="" id="' . $c['id'] . '">
+                        <label class="form-check-label" for="kat1">
+                            ' . $c['name'] . '
+                        </label>
+                    <br>
+                    ';
+                }
+                ?>
             </div>
             </div>
             <!-- /.card-body -->

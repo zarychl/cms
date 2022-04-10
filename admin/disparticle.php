@@ -40,7 +40,31 @@ $luser = getCurrentUserInfo();
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            
+            <table class="table table-striped">
+<thead>
+<tr>
+<th style="width: 10px">#</th>
+<th style="width: 205px;">Data dodania</th>
+<th>Tytuł</th>
+</tr>
+</thead>
+<tbody>
+<?php
+$articles = getAllArticles(); 
+  foreach($articles as $a)
+  {
+  echo "
+  <tr class='clickable-row'>
+  <td> ".$a['id']."</td>
+  <td>".$a['date']."</td>
+  <td>".$a['title']."</td>
+  </tr>
+  ";
+  }
+?>
+</tbody>
+
+</table>
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">

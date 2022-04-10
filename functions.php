@@ -139,6 +139,61 @@ function addSearchCount($q)
     }
 }
 
+function addArticle($title, $content, $date = false)
+{
+    global $mysqli;
+    if($date == false)
+    {
+        $stmt = $mysqli->prepare("INSERT INTO `articles` (`title`, `content`) VALUES (?, ?);");
+    }
+    else
+    {
+        $stmt = $mysqli->prepare("INSERT INTO `articles` (`title`, `content`, `date`) VALUES (?, ?, '$date');");
+    }
+    $stmt->bind_param("ss", $title, $content);
+    $stmt->execute();
+}
+
+function getAllArticles()
+{
+    global $mysqli;
+    $val = array();
+    $stmt = $mysqli->prepare("SELECT * FROM articles;");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    while($row = $result->fetch_assoc())
+    {
+        array_push($val, $row);
+    }
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $val;
+}
+
+function getCategories()
+{
+    global $mysqli;
+    $val = array();
+    $stmt = $mysqli->prepare("SELECT * FROM category ORDER BY name;");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    while($row = $result->fetch_assoc())
+    {
+        array_push($val, $row);
+    }
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $val;
+}
+
 function getSearchCount($limit)
 {
     global $mysqli;
