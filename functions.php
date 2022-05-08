@@ -174,6 +174,44 @@ function getAllArticles()
     return $val;
 }
 
+function getAllComments()
+{
+    global $mysqli;
+    $val = array();
+    $stmt = $mysqli->prepare("SELECT * FROM comments;");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    while($row = $result->fetch_assoc())
+    {
+        array_push($val, $row);
+    }
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $val;
+}
+
+function getArticleTitleFromId($id)
+{
+    global $mysqli;
+    $stmt = $mysqli->prepare("SELECT * FROM articles WHERE id = ? LIMIT 1");
+    $stmt->bind_param("i", $id);
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $row['title'];
+}
+
+
 function getCategories()
 {
     global $mysqli;

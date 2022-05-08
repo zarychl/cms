@@ -40,7 +40,39 @@ $luser = getCurrentUserInfo();
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            
+            <table class="table table-striped">
+<thead>
+<tr>
+<th style="width: 10px">#</th>
+<th style="width: 205px;">Data dodania</th>
+<th>Użytkownik</th>
+<th>Dot. artykułu</th>
+<th>Treść</th>
+</tr>
+</thead>
+<tbody>
+<?php
+$comments = getAllComments(); 
+  foreach($comments as $c)
+  {
+
+  $a = getArticleTitleFromId($c['article_id']);
+  $u = getUserInfo($c['user_id']);
+
+  echo "
+  <tr>
+  <td> ".$c['id']."</td>
+  <td>".$c['date']."</td>
+  <td><a href='profile.php?userid=". $u['id'] ."'>".$u['name']." (ID: " . $u['id'] . ")</a></td>
+  <td><a href='disparticle.php?articleid=". $c['article_id'] ."'>".$a." (ID: " . $c['article_id'] . ")</a></td>
+  <td>".$c['comment']."</td>
+  </tr>
+  ";
+  }
+?>
+</tbody>
+
+</table>
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
