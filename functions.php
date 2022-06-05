@@ -211,6 +211,66 @@ function getArticleTitleFromId($id)
     return $row['title'];
 }
 
+function getLastArticles($count = 4)
+{
+    global $mysqli;
+    $val = array();
+    $stmt = $mysqli->prepare("SELECT `id`, `title`, `category` FROM articles ORDER BY `date` LIMIT ?;");
+    $stmt->bind_param("i", $count);
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while($row = $result->fetch_assoc())
+    {
+        array_push($val, $row);
+    }
+
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $val;
+}
+
+function getComments($id)
+{
+    global $mysqli;
+    $val = array();
+    $stmt = $mysqli->prepare("SELECT * FROM `comments` WHERE article_id = ?;");
+    $stmt->bind_param("i", $id);
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while($row = $result->fetch_assoc())
+    {
+        array_push($val, $row);
+    }
+
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $val;
+}
+
+function getArticle($id)
+{
+    global $mysqli;
+    $stmt = $mysqli->prepare("SELECT * FROM articles WHERE id = ? LIMIT 1");
+    $stmt->bind_param("i", $id);
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    
+    if($result->num_rows == 0)
+    {
+        return -1;
+    }
+    return $row;
+}
 
 function getCategories()
 {

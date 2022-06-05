@@ -159,64 +159,32 @@
 
 	</div>
             </div>
-            
-        </div>
-        <div id="carouselIndicators" class="container-fluid mt-4 carousel slide" data-bs-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-bs-target="#carouselIndicators" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#carouselIndicators" data-bs-slide-to="1"></li>
-                <li data-bs-target="#carouselIndicators" data-bs-slide-to="2"></li>
-                <li data-bs-target="#carouselIndicators" data-bs-slide-to="3"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/big_banner/2.jpg" class="mx-auto d-block w-100">
-                </div>
-                <div class="carousel-item">
-                    <img src="images/big_banner/1.jpg" class="mx-auto d-block w-100">
-                </div>
-                <div class="carousel-item">
-                    <img src="images/big_banner/3.jpg" class="mx-auto d-block w-100">
-                </div>
-                <div class="carousel-item">
-                    <img src="images/big_banner/4.jpg" class="mx-auto d-block w-100">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="mx-auto carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <!-- <span class="visually-hidden">Next</span> -->
-            </button>
-        </div>
-        <div class="row mt-4 justify-content-center">
-                <div class="col-md-3 ms-5">
-                    <img class="img-fluid mt-3" src="images/baner 1.jpg" >
-                    <img class="img-fluid mt-3" src="images/baner 2.jpg" >
-                    <img class="img-fluid mt-3" src="images/baner 3.png" >
-                    <img class="img-fluid mt-3" src="images/baner 4.jpg" >
-                    <img class="img-fluid mt-3" src="images/baner 5.jpeg" >
-                </div>
-                <div class="col-md-6">
-                    <div class="h4 text-primary text-center">
-                        Aktualności
-                    </div>
-                    <?php 
-                    $articles = getLastArticles();
-                    foreach($articles as $a)
-                    {
-                        echo '
-                        <div class="row fs-5 justify-content-center mt-2">
-                            <img class="col-md-2" src="images/' . $a['category'] . '.jpg">
-                            <div class="col-md-5"><a href="article.php?id=' . $a['id'] . '" >' . $a['title'] . '</a></div>
-                        </div>
-                    ';
-                    }
+            <?php
+                $a = getArticle($_GET['id']);
+                $c = getComments($_GET['id']);
 
-                    ?>
-                </div>
+                echo '
+                <h2>'. $a['title'] .'</h2>
+                <p style="text-align: justify;">'. $a['content'] .'</p>
+                ';
+            ?>
+            <br><br>
+            <h4>Komentarze:</h4>
+            <?php
+            if($c != -1)
+                foreach($c as $comment)
+                {
+                    $name = getUserInfo($comment['user_id']);
+                    $name = $name['name'];
+                    echo '<span><strong>'. $name .'</strong></span><br>
+                    <span>'. $comment['comment'] .'</span>
+                    <hr>';
+                }
+            else echo '<span><strong>Brak komentarzy!</strong></span>';
+            ?>
         </div>
+
+
         <div class="row mt-5 bg-light">
             <div class="col-md-3 ms-5">
                 <h4>Państwowa Uczelnia w Krośnie</h4>
